@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
 import {Provider} from 'react-redux';
 import AddArticleForm from './components/AddArticleForm';
 import Articles from './components/Articles';
@@ -9,15 +9,19 @@ const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.main}>
-        <AddArticleForm />
-        <Articles />
+        <ScrollView>
+          <AddArticleForm />
+          <Articles />
+        </ScrollView>
       </SafeAreaView>
     </Provider>
   );
 };
 
 const styles = StyleSheet.create({
-  main: {},
+  main: {
+    flex: 1,
+  },
 });
 
 export default App;

@@ -24,7 +24,6 @@ const articlesSlice = createSlice({
       });
     },
     removeArticle: (state, action) => {
-      console.log(action.payload.id);
       state.articles = state.articles.filter(
         article => article.id !== action.payload.id,
       );

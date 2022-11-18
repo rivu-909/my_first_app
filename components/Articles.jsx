@@ -2,12 +2,7 @@ import {Button, Pressable, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeArticle} from './articlesSlice';
 
-function getArticleItem(article) {
-  const dispatch = useDispatch();
-  const deleteArticle = () => {
-    console.log(article.id, 'pressed');
-    dispatch(removeArticle({id: article.id}));
-  };
+function getArticleItem(article, deleteArticle) {
   return (
     <View key={article.id} style={styles.article}>
       <Text style={styles.articleTitle}>{article.title}</Text>
@@ -21,10 +16,16 @@ function getArticleItem(article) {
 
 export default function Articles() {
   const articles = useSelector(state => state.articles.articles);
+  const dispatch = useDispatch();
   return (
     <View style={styles.articles}>
       <Text style={styles.myArticleLabel}>My Articles</Text>
-      {articles.map(article => getArticleItem(article))}
+      {articles.map(article => {
+        const deleteArticle = () => {
+          dispatch(removeArticle({id: article.id}));
+        };
+        return getArticleItem(article, deleteArticle);
+      })}
     </View>
   );
 }
